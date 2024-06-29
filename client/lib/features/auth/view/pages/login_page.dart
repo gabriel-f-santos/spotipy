@@ -1,26 +1,22 @@
 import 'package:client/core/theme/app_pallete.dart';
 import 'package:client/features/auth/view/widgets/auth_gradient_button.dart';
 import 'package:client/features/auth/view/widgets/custom_field.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
-class SignupPage extends StatefulWidget {
-  const SignupPage({super.key});
+class SigninPage extends StatefulWidget {
+  const SigninPage({super.key});
 
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  State<SigninPage> createState() => _SigninPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
-  final _nameController = TextEditingController();
+class _SigninPageState extends State<SigninPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
-    _nameController.dispose();
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
@@ -38,14 +34,12 @@ class _SignupPageState extends State<SignupPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Signup Page.',
+                'Signin.',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 50,
                 ),
               ),
-              SizedBox(height: 30),
-              CustomField(hintText: 'Name', controller: _nameController),
               SizedBox(height: 15),
               CustomField(hintText: 'Email', controller: _emailController),
               SizedBox(height: 15),
@@ -55,16 +49,17 @@ class _SignupPageState extends State<SignupPage> {
                   isObscureText: true),
               SizedBox(height: 20),
               AuthGradientButton(
-                  buttonText: 'Sign In',
-                  onTap: () => print('Sign up button pressed.')),
+                buttonText: 'Sign in',
+                onTap: () => print('Sign in button pressed.'),
+              ),
               SizedBox(height: 20),
               RichText(
                 text: TextSpan(
-                  text: 'Already have an account? ',
+                  text: 'Doesnt have an account? ',
                   style: Theme.of(context).textTheme.titleMedium,
                   children: const [
                     TextSpan(
-                      text: 'Sign in.',
+                      text: 'Sign up.',
                       style: TextStyle(
                         color: Pallete.gradient2,
                         fontWeight: FontWeight.bold,
