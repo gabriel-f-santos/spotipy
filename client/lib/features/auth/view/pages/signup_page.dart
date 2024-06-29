@@ -1,3 +1,4 @@
+import 'package:client/features/auth/view/widgets/custom_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -13,16 +14,26 @@ class _SignupPageState extends State<SignupPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: const Column(
-        children: [
-          Text(
-            'Signup Page',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 15,
+      body: const Padding(
+        padding: EdgeInsets.all(15.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Signup Page.',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 50,
+              ),
             ),
-          ),
-        ],
+            SizedBox(height: 30),
+            CustomField(hintText: 'Name'),
+            SizedBox(height: 15),
+            CustomField(hintText: 'Email'),
+            SizedBox(height: 15),
+            CustomField(hintText: 'Password'),
+          ],
+        ),
       ),
     );
   }
