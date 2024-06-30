@@ -36,29 +36,31 @@ class _SigninPageState extends State<SigninPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Signin.',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 50,
                 ),
               ),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               CustomField(hintText: 'Email', controller: _emailController),
-              SizedBox(height: 15),
+              const SizedBox(height: 15),
               CustomField(
                   hintText: 'Password',
                   controller: _passwordController,
                   isObscureText: true),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               AuthGradientButton(
-                buttonText: 'Sign in',
-                onTap: () => AuthRemoteRepository().login(
-                  email: _emailController.text,
-                  password: _passwordController.text,
-                )
-              ),
-              SizedBox(height: 20),
+                  buttonText: 'Sign in',
+                  onTap: () async {
+                    final res = await AuthRemoteRepository().login(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    );
+                    print(res);
+                  }),
+              const SizedBox(height: 20),
               GestureDetector(
                 onTap: () => Navigator.push(
                   context,

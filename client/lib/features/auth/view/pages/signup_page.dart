@@ -34,39 +34,42 @@ class _SignupPageState extends State<SignupPage> {
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
-        padding: EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(15.0),
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Signup Page.',
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 50,
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 CustomField(hintText: 'Name', controller: _nameController),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 CustomField(hintText: 'Email', controller: _emailController),
-                SizedBox(height: 15),
+                const SizedBox(height: 15),
                 CustomField(
                     hintText: 'Password',
                     controller: _passwordController,
                     isObscureText: true),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 AuthGradientButton(
                   buttonText: 'Sign In',
-                  onTap: () => AuthRemoteRepository().signup(
-                    name: _nameController.text,
-                    email: _emailController.text,
-                    password: _passwordController.text,
-                  ),
+                  onTap: () async {
+                    final res = await AuthRemoteRepository().signup(
+                      name: _nameController.text,
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    );
+                    print(res);
+                  },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 GestureDetector(
                   onTap: () => Navigator.push(
                     context,

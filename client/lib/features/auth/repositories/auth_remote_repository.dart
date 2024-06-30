@@ -1,7 +1,11 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:client/features/auth/model/model.dart';
 import 'package:dio/dio.dart';
 
 class AuthRemoteRepository {
-  Future<void> signup({
+  Future<UserModel> signup({
     required String name,
     required String email,
     required String password,
@@ -16,13 +20,18 @@ class AuthRemoteRepository {
         'http://10.0.2.2:8000/auth/signup',
         data: data,
       );
-      print(response.data);
+      if (response.statusCode != HttpStatus.created) {
+        throw Exception(response.data);
+      }
+
+      return UserModel.fromJson(response.data);
     } catch (e) {
       print(e);
+      throw 'An error occurred';
     }
   }
 
-  Future<void> login({
+  Future<UserModel> login({
     required String email,
     required String password,
   }) async {
@@ -35,9 +44,13 @@ class AuthRemoteRepository {
         'http://10.0.2.2:8000/auth/login',
         data: data,
       );
-      print(response.data);
+      if (response.statusCode != HttpStatus.ok) {
+        throw 'An error occurred';
+      }
+      return UserModel.fromJson(response.data);
     } catch (e) {
       print(e);
+      throw 'An error occurred';
     }
   }
 }
