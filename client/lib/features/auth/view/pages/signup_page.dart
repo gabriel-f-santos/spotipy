@@ -2,20 +2,22 @@ import 'package:client/core/theme/app_pallete.dart';
 import 'package:client/features/auth/repositories/auth_remote_repository.dart';
 import 'package:client/features/auth/view/widgets/auth_gradient_button.dart';
 import 'package:client/features/auth/view/widgets/custom_field.dart';
+import 'package:client/features/auth/viewmodel/auth_view_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'login_page.dart';
 
-class SignupPage extends StatefulWidget {
+class SignupPage extends ConsumerStatefulWidget {
   const SignupPage({super.key});
 
   @override
-  State<SignupPage> createState() => _SignupPageState();
+  ConsumerState<SignupPage> createState() => _SignupPageState();
 }
 
-class _SignupPageState extends State<SignupPage> {
+class _SignupPageState extends ConsumerState<SignupPage> {
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -61,11 +63,15 @@ class _SignupPageState extends State<SignupPage> {
                 AuthGradientButton(
                   buttonText: 'Sign In',
                   onTap: () async {
-                    final res = await AuthRemoteRepository().signup(
-                      name: _nameController.text,
-                      email: _emailController.text,
-                      password: _passwordController.text,
-                    );
+                    if (_formKey.currentState!.validate()) {
+                      final res =
+                          await ref.read(authViewModelProvider.notifier).signup(
+                                name: _nameController.text,
+                                email: _emailController.text,
+                                password: _passwordController.text,
+                              );
+                      print(res);
+                    }
                     print(res);
                   },
                 ),
