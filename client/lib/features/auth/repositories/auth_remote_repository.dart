@@ -47,7 +47,10 @@ class AuthRemoteRepository {
       if (response.statusCode != HttpStatus.ok) {
         throw 'An error occurred';
       }
-      return UserModel.fromJson(response.data);
+
+      UserModel user = UserModel.fromMap(response.data as Map<String, dynamic>);
+      print('User: $user');
+      return user;
     } catch (e) {
       print(e);
       throw 'An error occurred';

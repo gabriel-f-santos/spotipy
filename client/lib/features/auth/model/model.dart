@@ -46,10 +46,11 @@ class UserModel {
   }
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
+    final user = map['user'] as Map<String, dynamic>;
     return UserModel(
-      name: map['name'] ?? '',
-      email: map['email'] ?? '',
-      id: map['id'] ?? '',
+      name: user['name'] ?? '',
+      email: user['email'] ?? '',
+      id: user['id'] ?? '',
       token: map['token'] ?? '',
       // favorites: List<FavSongModel>.from(
       //   (map['favorites'] ?? []).map(
