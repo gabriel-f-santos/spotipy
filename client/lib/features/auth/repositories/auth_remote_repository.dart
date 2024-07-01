@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:client/core/constants/server_constant.dart';
 import 'package:client/features/auth/model/model.dart';
 import 'package:dio/dio.dart';
 
@@ -17,7 +18,7 @@ class AuthRemoteRepository {
         'password': password,
       };
       final response = await Dio().post(
-        'http://10.0.2.2:8000/auth/signup',
+        '${ServerConstant.BASE_URL}/auth/signup',
         data: data,
       );
       if (response.statusCode != HttpStatus.created) {
@@ -41,7 +42,7 @@ class AuthRemoteRepository {
     };
     try {
       final response = await Dio().post(
-        'http://10.0.2.2:8000/auth/login',
+        '{ServerConstant.BASE_URL}/auth/login',
         data: data,
       );
       if (response.statusCode != HttpStatus.ok) {
