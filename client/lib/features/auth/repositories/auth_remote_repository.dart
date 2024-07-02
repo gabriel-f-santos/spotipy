@@ -3,6 +3,14 @@ import 'dart:io';
 import 'package:client/core/constants/server_constant.dart';
 import 'package:client/features/auth/model/model.dart';
 import 'package:dio/dio.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+
+part 'auth_remote_repository.g.dart';
+
+@riverpod
+AuthRemoteRepository authRemoteRepository(AuthRemoteRepositoryRef ref) {
+  return AuthRemoteRepository();
+}
 
 class AuthRemoteRepository {
   Future<UserModel> signup({
@@ -34,7 +42,7 @@ class AuthRemoteRepository {
     }
   }
 
-  Future<UserModel> login({
+  Future<UserModel> signin({
     required String email,
     required String password,
   }) async {
@@ -51,10 +59,13 @@ class AuthRemoteRepository {
         throw 'An error occurred';
       }
 
-      final _user = response.data['user'] as Map<String, dynamic>;
+      print(response.data);
 
-      UserModel user = UserModel.fromMap(_user);
+      UserModel user =
+          UserModel.fromMap(response.data['user'] as Map<String, dynamic>);
+
       print('User: $user');
+
       return user;
     } catch (e) {
       print(e);
