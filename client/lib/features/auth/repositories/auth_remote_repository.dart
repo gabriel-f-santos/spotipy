@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:client/core/constants/server_constant.dart';
@@ -21,11 +20,14 @@ class AuthRemoteRepository {
         '${ServerConstant.BASE_URL}/auth/signup',
         data: data,
       );
+
+      print(response.data);
+
       if (response.statusCode != HttpStatus.created) {
         throw Exception(response.data);
       }
 
-      return UserModel.fromJson(response.data);
+      return UserModel.fromMap(response.data as Map<String, dynamic>);
     } catch (e) {
       print(e);
       throw 'An error occurred';
@@ -42,14 +44,16 @@ class AuthRemoteRepository {
     };
     try {
       final response = await Dio().post(
-        '{ServerConstant.BASE_URL}/auth/login',
+        '${ServerConstant.BASE_URL}/auth/login',
         data: data,
       );
       if (response.statusCode != HttpStatus.ok) {
         throw 'An error occurred';
       }
 
-      UserModel user = UserModel.fromMap(response.data as Map<String, dynamic>);
+      final _user = response.data['user'] as Map<String, dynamic>;
+
+      UserModel user = UserModel.fromMap(_user);
       print('User: $user');
       return user;
     } catch (e) {

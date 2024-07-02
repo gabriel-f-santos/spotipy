@@ -1,3 +1,4 @@
+import 'package:client/core/failure/failure.dart';
 import 'package:client/features/auth/model/model.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:client/features/auth/repositories/auth_remote_repository.dart';
@@ -26,7 +27,8 @@ class AuthViewModel extends _$AuthViewModel {
       );
       state = AsyncValue.data(user);
     } catch (e) {
-      state = AsyncValue.error(e);
+      state = AsyncValue.error(
+          AppFailure(e.toString()).message, StackTrace.current);
     }
   }
 }
