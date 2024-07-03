@@ -84,12 +84,13 @@ class _SigninPageState extends ConsumerState<SigninPage> {
                           onTap: () async {
                             if (_formKey.currentState!.validate()) {
                               {
-                                final res = await AuthRemoteRepository().signin(
+                                await ref.read(authViewModelProvider.notifier).signin(
                                   email: _emailController.text,
                                   password: _passwordController.text,
                                 );
-                                print(res);
                               }
+                            } else {
+                              showSnackBar(context, 'Invalid form');
                             }
                           }),
                       const SizedBox(height: 20),
