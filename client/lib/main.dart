@@ -10,8 +10,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final container = ProviderContainer();
   await container.read(authViewModelProvider.notifier).initSharedPreferences();
-  final user = await container.read(authViewModelProvider.notifier).getData();
-  print('Is user logged in? ${user != null}');
+  await container.read(authViewModelProvider.notifier).getData();
 
   runApp(
     UncontrolledProviderScope(
@@ -27,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Spotipy',
       theme: AppTheme.darkThemeMode,
       home: const SigninPage(),
     );
