@@ -3,8 +3,9 @@ import 'package:client/core/theme/loader.dart';
 import 'package:client/core/utils.dart';
 import 'package:client/features/auth/repositories/auth_remote_repository.dart';
 import 'package:client/features/auth/view/widgets/auth_gradient_button.dart';
-import 'package:client/features/auth/view/widgets/custom_field.dart';
+import 'package:client/core/widgets/custom_field.dart';
 import 'package:client/features/auth/viewmodel/auth_view_model.dart';
+import 'package:client/features/home/view/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -38,12 +39,13 @@ class _SigninPageState extends ConsumerState<SigninPage> {
       next?.when(
         data: (data) {
           print('Logado com sucesso \n\n');
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => const Placeholder(),
-          //   ),
-          // );
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomePage(),
+            ),
+            (route) => false,
+          );
         },
         error: (error, st) {
           showSnackBar(context, "Error");

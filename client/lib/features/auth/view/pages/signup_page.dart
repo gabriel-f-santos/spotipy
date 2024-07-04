@@ -3,7 +3,7 @@ import 'package:client/core/theme/loader.dart';
 import 'package:client/core/utils.dart';
 
 import 'package:client/features/auth/view/widgets/auth_gradient_button.dart';
-import 'package:client/features/auth/view/widgets/custom_field.dart';
+import 'package:client/core/widgets/custom_field.dart';
 import 'package:client/features/auth/viewmodel/auth_view_model.dart';
 
 import 'package:flutter/material.dart';
