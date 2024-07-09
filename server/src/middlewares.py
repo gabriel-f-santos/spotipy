@@ -3,7 +3,7 @@ from http import HTTPStatus
 import jwt
 from fastapi import Header, HTTPException
 
-
+#TODO add tests
 def auth_middleware(x_auth_token=Header()):
     try:
         if not x_auth_token:
